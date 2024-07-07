@@ -1,0 +1,47 @@
+.course-item {
+  display: flex;
+  width: auto;
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.course-item__content {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background-color: white;
+}
+
+.course-item__image {
+  width: auto;
+  overflow: hidden;
+}
+
+.course-item__image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.course-item__info {
+  padding: 10px 30px;
+}
+
+.course-item__info h3 {
+  width: fit-content;
+  color: white;
+  background-color: #800000;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.course-item__info p {
+  text-align: left;
+  margin: 0.5rem 0;
+  color: #333;
+  font-size: 1rem;
+}
