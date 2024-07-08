@@ -1,0 +1,30 @@
+nav {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #7e0202;
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.side-icon {
+  font-size: 4rem;
+}
+
+.fill {
+  background-color: #7e0202;
+  color: white;
+  border: #7e0202 solid 2px;
+  border-radius: 10px;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseList from '../../components/common/CourseList'
+import CourseList from '../../components/common/Courses/CourseList'
 
 function CourseListPage() {
 
