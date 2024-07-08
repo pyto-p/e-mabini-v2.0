@@ -1,5 +1,6 @@
 import React from 'react';
 import CourseItem from './CourseItem';
+import './CourseList.css';
 
 function CourseList(props) {
   if (props.items.length === 0) {
@@ -12,7 +13,7 @@ function CourseList(props) {
   }
 
   return (
-    <ul>
+    <ul className='course-lists'>
       {props.items.map(course => (
         <CourseItem
           key={course.id}

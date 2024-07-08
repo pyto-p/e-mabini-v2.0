@@ -1,6 +1,7 @@
 .course-item {
   display: flex;
-  width: auto;
+  width: 20rem;
+  height: 18rem;
   list-style: none;
   margin: 1rem 0;
 }

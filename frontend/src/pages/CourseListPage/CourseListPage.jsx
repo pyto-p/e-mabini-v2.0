@@ -1,5 +1,6 @@
 import React from 'react'
 import CourseList from '../../components/common/Courses/CourseList'
+import './CourseListPage.css'
 
 function CourseListPage() {
 
@@ -21,7 +22,9 @@ function CourseListPage() {
   }]
 
   return (
-    <CourseList items={COURSES} />
+    <div className='course-list__container'>
+      <CourseList items={COURSES} />
+    </div>
   )
 }
 

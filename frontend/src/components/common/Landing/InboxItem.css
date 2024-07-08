@@ -1,0 +1,30 @@
+.inbox-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.inbox-item__date {
+  color: #222;
+}
+
+.inbox-item__task {
+  color: #333;
+  font-weight: bold;
+}
+
+.inbox-item__task:hover {
+  text-decoration: underline;
+}
+
+.inbox-header {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.inbox-header span {
+  font-weight: normal;
+}

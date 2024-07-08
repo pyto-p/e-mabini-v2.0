@@ -6,24 +6,10 @@ import './MainNavigation.css';
 import SideNavigation from './SideNavigation';
 
 function MainNavigation() {
-  // const [menuOpen, setMenuOpen] = useState(false);
-
-  // const toggleMenuHandler = () => {
-  //   setMenuOpen(prevState => !prevState);
-  // };
-
   return (
     <SideNavigation>
-      {/* <button 
-        className={`main-navigation__menu-btn ${menuOpen ? 'active' : ''}`} 
-        onClick={toggleMenuHandler}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button> */}
 
-      <nav /* className={`${menuOpen ? 'open' : ''}`}*/>
+      <nav>
         <Link to="/">
           <BsHouseFill className='side-icon' />
           Home

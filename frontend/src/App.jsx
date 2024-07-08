@@ -35,15 +35,12 @@ function App() {
           <Route path="/courses" exact>
             <CourseListPage />
           </Route>
-          <Route path="/messages" exact>
+          <Route path="/chat" exact>
             <ChatPage />
           </Route>
           <Route path="/assignments" exact>
             <AssignmentPage />
           </Route>
-          {/* <Route path="/course/:courseId" exact>
-        
-          </Route> */}
           <Redirect to="/" />
         </Switch>
       </div>
