@@ -10,7 +10,7 @@ function MainNavigation() {
     <SideNavigation>
 
       <nav>
-        <Link to="/">
+        <Link to="/home">
           <BsHouseFill className='side-icon' />
           Home
         </Link>

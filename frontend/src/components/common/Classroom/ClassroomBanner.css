@@ -1,0 +1,13 @@
+.classroom-banner {
+  width: 100%;
+}
+
+.classroom-banner__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px;
+  gap: 20px;
+  border: 2px solid #d3d3d3;
+  border-radius: 12px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CourseItem.css';
 
 function CourseItem(props) {
@@ -10,9 +11,17 @@ function CourseItem(props) {
         </div>
         <div className='course-item__info'>
           <h3>{props.code}</h3>
-          <p>{props.name}</p>
-          <p>{props.schedule}</p>
-          <p>{props.instructor}</p>
+          <Link
+            className="course-item__link"
+            to={{
+              pathname: `/course/${props.code.toLowerCase().replace(/\s/g, "")}`,
+              state: { ...props }
+            }}
+          >
+            <p className='course-item__name'>{props.name}</p>
+          </Link>
+          <p className='course-item__details'>{props.schedday + ' ' + props.schedtime}</p>
+          <p className='course-item__details'>{props.instructor}</p>
         </div>
       </div>
     </li>

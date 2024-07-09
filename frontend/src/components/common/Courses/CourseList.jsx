@@ -21,7 +21,9 @@ function CourseList(props) {
           image={course.image}
           code={course.code}
           name={course.name}
-          schedule={course.schedule}
+          section={course.section}
+          schedday={course.schedday}
+          schedtime={course.schedtime}
           instructor={course.instructor}
         />
       ))}

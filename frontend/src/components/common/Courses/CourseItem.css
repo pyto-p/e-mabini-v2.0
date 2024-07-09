@@ -6,6 +6,17 @@
   margin: 1rem 0;
 }
 
+.course-item__link {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.course-item__name {
+  color: #333;
+  font-size: 1rem;
+}
+
 .course-item__content {
   display: flex;
   width: auto;
@@ -28,6 +39,9 @@
 
 .course-item__info {
   padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem 
 }
 
 .course-item__info h3 {
@@ -35,14 +49,14 @@
   color: white;
   background-color: #800000;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.6rem;
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
-.course-item__info p {
+.course-item__details {
   text-align: left;
-  margin: 0.5rem 0;
   color: #333;
   font-size: 1rem;
 }
+

@@ -1,38 +1,20 @@
 import React, { useState } from 'react';
 import InboxList from '../../components/common/Landing/InboxList';
 import LandingSections from '../../components/common/Landing/LandingSections';
+import { INBOX, USER } from '../../dummyData';
 import './LandingPage.css';
 
 function LandingPage(props) {
-  const USER = {
-    name: "Temporal, Sebastian Audrey I.",
-    code: "2021-10903-MN-0"
-  }
+  const USER_DATA = USER;
 
-  const INBOX = [
-    {
-      id: 1,
-      date: "2022-01-01",
-      task: "Task 1"
-    },
-    {
-      id: 2,
-      date: "2022-02-01",
-      task: "Task 2"
-    },
-    {
-      id: 3,
-      date: "2022-03-01",
-      task: "Task 3"
-    },
-  ];
+  const INBOX_DATA = INBOX;
 
   const [selectedSection, setSelectedSection] = useState('inbox');
 
   const renderSection = () => {
     switch (selectedSection) {
       case 'inbox':
-        return <InboxList items={INBOX} />;
+        return <InboxList items={INBOX_DATA} />;
       case 'feedback':
         return <div className='center'>Submit Feedback</div>;
       case 'clearance':
@@ -48,7 +30,7 @@ function LandingPage(props) {
         <img className='landing-page__image' src="/landing-banner.png" alt="" />
         <div className='landing-page__content'>
           <div className="content-header">
-            <h2>{USER.name + " " + "(" + USER.code + ")"}</h2>
+            <h2>{USER_DATA.name + " " + "(" + USER_DATA.code + ")"}</h2>
           </div>
           <hr className='content-header__divider' />
           <div className='landing-page__divider'>

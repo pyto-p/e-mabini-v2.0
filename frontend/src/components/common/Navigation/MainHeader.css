@@ -40,13 +40,13 @@
 
 .bell-icon {
   color: #daa520;
-  width: 2rem;
-  height: 2rem;
+  width: 40px;
+  height: auto;
 }
 
 .user-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 50px;
+  height: auto;
 }
 
 .menu-btn {

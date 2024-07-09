@@ -1,0 +1,8 @@
+.classroom-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+  gap: 20px;
+}

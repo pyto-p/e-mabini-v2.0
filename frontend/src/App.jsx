@@ -5,6 +5,7 @@ import MainNavigation from "./components/common/Navigation/MainNavigation";
 import AssignmentPage from './pages/AssignmentPage/AssignmentPage';
 import CalendarPage from './pages/CalendarPage/CalendarPage';
 import ChatPage from './pages/ChatPage/ChatPage';
+import ClassroomPage from './pages/ClassroomPage/ClassroomPage';
 import CourseListPage from './pages/CourseListPage/CourseListPage';
 import LandingPage from "./pages/LandingPage/LandingPage";
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -17,7 +18,7 @@ function App() {
       <div className="main-content">
         <MainNavigation />
         <Switch>
-          <Route path="/" exact>
+          <Route path="/home" exact>
             <LandingPage />
           </Route>
           <Route path="/signup" exact>
@@ -26,14 +27,14 @@ function App() {
           <Route path="/login" exact>
             <LoginPage />
           </Route>
-          <Route path="/home" exact>
-            <CourseListPage />
-          </Route>
           <Route path="/calendar" exact>
             <CalendarPage />
           </Route>
           <Route path="/courses" exact>
             <CourseListPage />
+          </Route>
+          <Route path="/course/:courseid" exact>
+            <ClassroomPage />
           </Route>
           <Route path="/chat" exact>
             <ChatPage />
@@ -41,7 +42,7 @@ function App() {
           <Route path="/assignments" exact>
             <AssignmentPage />
           </Route>
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Switch>
       </div>
     </Router>
