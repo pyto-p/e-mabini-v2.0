@@ -56,7 +56,7 @@ export const POSTS = [
     date: "2022-01-01",
     author: "Author 1",
     header: "Header 1",
-    content: "Content 1",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis vitae et leo duis ut diam quam nulla porttitor. In nulla posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Congue quisque egestas diam in arcu. Sem nulla pharetra diam sit amet nisl. Non blandit massa enim nec dui nunc. Nibh venenatis cras sed felis eget velit aliquet. ",
     typePost: "Announcement"
   },
   {
@@ -65,7 +65,7 @@ export const POSTS = [
     date: "2022-02-01",
     author: "Author 2",
     header: "Header 2",
-    content: "Content 2",
+    content: "Malesuada proin libero nunc consequat interdum varius. Feugiat vivamus at augue eget arcu dictum varius. Id volutpat lacus laoreet non. Enim sed faucibus turpis in eu mi. Dignissim cras tincidunt lobortis feugiat vivamus at. Id consectetur purus ut faucibus pulvinar elementum integer. Arcu vitae elementum curabitur vitae nunc sed velit. Lectus urna duis convallis convallis tellus id interdum. ",
     typePost: "Assignment"
   },
   {
@@ -74,7 +74,7 @@ export const POSTS = [
     date: "2022-03-01",
     author: "Author 3",
     header: "Header 3",
-    content: "Content 3",
+    content: "Magna sit amet purus gravida quis blandit turpis. Ac turpis egestas sed tempus. Viverra mauris in aliquam sem fringilla ut morbi tincidunt. Integer quis auctor elit sed vulputate mi sit amet mauris. Luctus venenatis lectus magna fringilla urna.",
     typePost: "Exam"
   },
 ]

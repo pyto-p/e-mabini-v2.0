@@ -3,6 +3,7 @@ import PostItem from './PostItem';
 import './PostList.css';
 
 function PostList(props) {
+
   if (props.posts.length === 0) { 
     return (
       <div className="post-list center">
@@ -10,7 +11,7 @@ function PostList(props) {
       </div>
     )
   }
-
+  
   return (
     <div className="post-list">
       {props.posts.map(post => (

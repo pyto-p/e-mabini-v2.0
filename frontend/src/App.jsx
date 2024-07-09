@@ -9,6 +9,7 @@ import ClassroomPage from './pages/ClassroomPage/ClassroomPage';
 import CourseListPage from './pages/CourseListPage/CourseListPage';
 import LandingPage from "./pages/LandingPage/LandingPage";
 import LoginPage from './pages/LoginPage/LoginPage';
+import PostPage from "./pages/PostPage/PostPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/course/:courseid" exact>
             <ClassroomPage />
+          </Route>
+          <Route path="/course/:courseid/:postid" exact>
+            <PostPage />
           </Route>
           <Route path="/chat" exact>
             <ChatPage />

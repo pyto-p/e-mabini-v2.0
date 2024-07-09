@@ -1,22 +1,26 @@
 import React from 'react';
 import { BsReceipt } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { dateFormatter } from "../../../dateFormatter";
 import './PostItem.css';
 
 function PostItem(props) {
+  const { courseid } = useParams();
+  const dateFormatted = dateFormatter(props.date);
+
   return (
-    <Link className="post-item__link" to="#">
+    <Link className="post-item__link" to={`/course/${courseid}/${props.id}`}>
       <li className='post-item'>
         <BsReceipt className='post-item__image' />
         <div className="post-item__content">
           <p>
             {props.author + ' posted a new ' + props.typePost + ': ' + props.header}
           </p>
-          <p>{props.date}</p>
+          <p>{dateFormatted}</p>
         </div>
       </li>
     </Link>
   )
 }
 
-export default PostItem
+export default PostItem;
