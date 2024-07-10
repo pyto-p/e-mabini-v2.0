@@ -1,4 +1,6 @@
 import React from 'react';
+import { BsPlus } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 import PostItem from './PostItem';
 import './PostList.css';
 
@@ -14,6 +16,10 @@ function PostList(props) {
   
   return (
     <div className="post-list">
+       <Link className="classroom-page__link" to={`/create-post`}>
+          <BsPlus className='classroom-page__icon' />
+          Create Post
+        </Link>
       {props.posts.map(post => (
         <PostItem
           key={post.id}

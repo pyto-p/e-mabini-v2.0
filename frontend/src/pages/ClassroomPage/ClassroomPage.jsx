@@ -12,17 +12,15 @@ function ClassroomPage() {
 
   // Filter posts by course code
   const filteredPosts = POSTS.filter(post => {
-    console.log(post.code.toLowerCase());
-    console.log(courseid.toLowerCase());
     return post.code.toLowerCase().replace(/\s/g, "") === courseid.toLowerCase();
-  })
+  });
 
   return (
     <div className='classroom-page'>
       <ClassroomBanner banner={courseData} />
       <PostList posts={filteredPosts} />
     </div>
-  )
+  );
 }
 
 export default ClassroomPage;

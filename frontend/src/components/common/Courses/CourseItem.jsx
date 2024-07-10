@@ -10,7 +10,7 @@ function CourseItem(props) {
           <img src={props.image} alt={props.code} />
         </div>
         <div className='course-item__info'>
-          <h3>{props.code}</h3>
+          <h3>{props.code + ' ' + '(' + props.section + ')'}</h3>
           <Link
             className="course-item__link"
             to={{
