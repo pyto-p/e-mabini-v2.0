@@ -2,6 +2,17 @@
   width: 100%;
 }
 
+.classroom-banner__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.classroom-banner__buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .classroom-banner__content {
   width: 100%;
   display: flex;
@@ -10,4 +21,21 @@
   gap: 20px;
   border: 2px solid #d3d3d3;
   border-radius: 12px;
+}
+
+.course-item__delete {
+  display: flex;
+  font: inherit;
+  align-items: center;
+  width: fit-content;
+  color: white;
+  margin: 0;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 10px;
+  border-radius: 12px;
+  gap: 10px;
+  font-size: 1rem;
+  background-color: #7e0202;
+  border: 1px solid #7e0202;
 }

@@ -36,28 +36,30 @@ function UpdateCoursePage() {
   const identifiedCourse = COURSES.find(course => course.code.toLowerCase().replace(/\s/g, "") === courseid.toLowerCase());
 
   useEffect(() => { 
-    setFormData({
-      code: {
-        value: identifiedCourse.code,
-        isValid: true
-      },
-      name: {
-        value: identifiedCourse.name,
-        isValid: true
-      },
-      section: {
-        value: identifiedCourse.section,
-        isValid: true
-      },
-      schedday: {
-        value: identifiedCourse.schedday,
-        isValid: true
-      },
-      schedtime: {
-        value: identifiedCourse.schedtime,
-        isValid: true
-      },
-    }, true);
+    if (identifiedCourse) {
+      setFormData({
+        code: {
+          value: identifiedCourse.code,
+          isValid: true
+        },
+        name: {
+          value: identifiedCourse.name,
+          isValid: true
+        },
+        section: {
+          value: identifiedCourse.section,
+          isValid: true
+        },
+        schedday: {
+          value: identifiedCourse.schedday,
+          isValid: true
+        },
+        schedtime: {
+          value: identifiedCourse.schedtime,
+          isValid: true
+        },
+      }, true);
+    }
     setIsLoading(false);
   }, [setFormData, identifiedCourse]);
 

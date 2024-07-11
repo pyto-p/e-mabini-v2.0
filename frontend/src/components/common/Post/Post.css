@@ -17,3 +17,7 @@
   gap: 20px;
 }
 
+.post__buttons {
+  display: flex;
+  gap: 20px;
+}

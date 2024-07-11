@@ -6,7 +6,6 @@ import './PostList.css';
 
 function PostList(props) {
   const { courseid } = useParams();
-  console.log("hey" + courseid);
 
   if (props.posts.length === 0) {
     return (
@@ -18,10 +17,12 @@ function PostList(props) {
 
   return (
     <div className="post-list">
-      <Link className="classroom-page__link" to={`/course/${courseid}/new`}>
-        <BsPlus className='classroom-page__icon' />
-        Create Post
-      </Link>
+      <div className="post-list__buttons">
+        <Link className="classroom-page__link" to={`/course/${courseid}/new`}>
+          <BsPlus className='classroom-page__icon' />
+          Create Post
+        </Link>
+      </div>
       {props.posts.map(post => (
         <PostItem
           key={post.id}
