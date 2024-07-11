@@ -1,0 +1,71 @@
+.auth-page {
+  width: 90%;
+  max-width: 40rem;
+  height: fit-content;
+  max-height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: #f9f9f9; /* Example background color */
+  border: 1px solid #ccc; /* Example border color */
+  border-radius: 8px; /* Example border radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.auth-page h2 {
+  text-align: center;
+  color: #333; /* Example color */
+}
+
+.auth-page hr {
+  margin: 1.5rem 0;
+}
+
+.auth-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-page__user-type {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+}
+
+.auth-page__user-type label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  background-color: #7e0202;
+  color: white;
+  padding: 0.5rem 1rem;  
+  border-radius: 4px;
+  font: inherit;
+}
+
+.btn {
+  background: #7e0202; /* Example background color */
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 4px; /* Example border radius */
+  cursor: pointer;
+  font: inherit;
+  margin: 1rem 0;
+}
+
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn.switch-mode {
+  background: transparent;
+  color: #ff0055;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}

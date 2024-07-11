@@ -1,8 +1,9 @@
 import React from "react";
-import { Redirect, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Redirect, Route, BrowserRouter as Router, Switch, useLocation } from "react-router-dom";
 import MainHeader from './components/common/Navigation/MainHeader';
 import MainNavigation from "./components/common/Navigation/MainNavigation";
 import AssignmentPage from './pages/AssignmentPage/AssignmentPage';
+import AuthPage from './pages/AuthPage/AuthPage';
 import CalendarPage from './pages/CalendarPage/CalendarPage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import ClassroomPage from './pages/ClassroomPage/ClassroomPage';
@@ -10,27 +11,22 @@ import CourseListPage from './pages/CourseListPage/CourseListPage';
 import CreateCoursePage from './pages/CourseListPage/CreateCoursePage';
 import UpdateCoursePage from "./pages/CourseListPage/UpdateCoursePage";
 import LandingPage from "./pages/LandingPage/LandingPage";
-import LoginPage from './pages/LoginPage/LoginPage';
 import CreatePostPage from "./pages/PostPage/CreatePostPage";
 import PostPage from "./pages/PostPage/PostPage";
 import UpdatePostPage from './pages/PostPage/UpdatePostPage';
-import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/auth';
+
   return (
-    <Router>
-      <MainHeader />
+    <>
+      {!isAuthPage && <MainHeader />}
       <div className="main-content">
-        <MainNavigation />
+        {!isAuthPage && <MainNavigation />}
         <Switch>
           <Route path="/home" exact>
             <LandingPage />
-          </Route>
-          <Route path="/signup" exact>
-            <SignUpPage />
-          </Route>
-          <Route path="/login" exact>
-            <LoginPage />
           </Route>
           <Route path="/calendar" exact>
             <CalendarPage />
@@ -62,11 +58,22 @@ function App() {
           <Route path="/assignments" exact>
             <AssignmentPage />
           </Route>
+          <Route path="/auth" exact>
+            <AuthPage />
+          </Route>
           <Redirect to="/home" />
         </Switch>
       </div>
+    </>
+  );
+};
+
+const AppWrapper = () => {
+  return (
+    <Router>
+      <App />
     </Router>
   );
-}
+};
 
-export default App;
+export default AppWrapper;
