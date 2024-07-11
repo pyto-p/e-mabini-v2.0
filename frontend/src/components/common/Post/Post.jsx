@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { dateFormatter } from '../../../dateFormatter';
 import { POSTS } from '../../../dummyData';
 import './Post.css';
@@ -20,6 +20,11 @@ function Post() {
         <h1>{post.header}</h1>
         <p>{post.author + ' • ' + dateFormatted}</p>
         <p>{post.content}</p>
+        <Link className="post-item__link" to={`/course/${courseid}/${postid}/edit`}>
+          <button className='post-item__button'>
+            Edit Post
+          </button>
+        </Link>
       </div>
     </div>
   );

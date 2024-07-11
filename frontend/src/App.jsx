@@ -8,10 +8,12 @@ import ChatPage from './pages/ChatPage/ChatPage';
 import ClassroomPage from './pages/ClassroomPage/ClassroomPage';
 import CourseListPage from './pages/CourseListPage/CourseListPage';
 import CreateCoursePage from './pages/CourseListPage/CreateCoursePage';
+import UpdateCoursePage from "./pages/CourseListPage/UpdateCoursePage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import LoginPage from './pages/LoginPage/LoginPage';
 import CreatePostPage from "./pages/PostPage/CreatePostPage";
 import PostPage from "./pages/PostPage/PostPage";
+import UpdatePostPage from './pages/PostPage/UpdatePostPage';
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 function App() {
@@ -36,17 +38,23 @@ function App() {
           <Route path="/courses" exact>
             <CourseListPage />
           </Route>
-          <Route path="/create-course" exact>
+          <Route path="/courses/new" exact>
             <CreateCoursePage />
+          </Route>
+          <Route path="/courses/:courseid" exact>
+            <UpdateCoursePage />
           </Route>
           <Route path="/course/:courseid" exact>
             <ClassroomPage />
           </Route>
+          <Route path="/course/:courseid/new" exact>
+            <CreatePostPage />
+          </Route>
+          <Route path="/course/:courseid/:postid/edit" exact>
+            <UpdatePostPage />
+          </Route>
           <Route path="/course/:courseid/:postid" exact>
             <PostPage />
-          </Route>
-          <Route path="/create-post" exact>
-            <CreatePostPage />
           </Route>
           <Route path="/chat" exact>
             <ChatPage />

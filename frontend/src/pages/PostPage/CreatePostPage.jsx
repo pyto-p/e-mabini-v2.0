@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from 'react';
 import Input from '../../components/common/FormElements/Input';
 import { VALIDATOR_REQUIRE } from '../../components/common/utils/validator';
-import './CreatePostPage.css';
+import './PostForm.css';
 
 const formReducer = (state, action) => {
   switch (action.type) {
@@ -27,16 +27,12 @@ const formReducer = (state, action) => {
       };
     default:
       return state;
-    }
+  }
 }
 
 function CreatePostPage() {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: {
-      code: {
-        value: '',
-        isValid: false
-      },
       header: {
         value: '',
         isValid: false
@@ -45,24 +41,20 @@ function CreatePostPage() {
         value: '',
         isValid: false
       },
-      author: {
+      typePost: {
         value: '',
         isValid: false
       },
-      date: {
-        value: '',
-        isValid: false
-      }
     },
     isValid: false
   });
 
   const inputHandler = useCallback((id, value, isValid) => {
-    dispatch({ 
-      type: 'INPUT_CHANGE', 
-      value: value, 
-      isValid: isValid, 
-      inputId: id 
+    dispatch({
+      type: 'INPUT_CHANGE',
+      value: value,
+      isValid: isValid,
+      inputId: id
     });
   }, []);
 
@@ -74,37 +66,38 @@ function CreatePostPage() {
   return (
     <div className="post-form__page">
       <form className='post-form' onSubmit={postSubmitHandler}>
+        <h2>Create Post</h2>
         <Input
-          id="code" 
-          element="input" 
-          type="text" 
-          label="Course Code" 
-          validators={[VALIDATOR_REQUIRE()]} 
-          errorText="Please enter a valid course code."  
+          id="typePost"
+          element="input"
+          type="text"
+          label="Type of Post"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter the type of post."
           onInput={inputHandler}
         />
         <Input
-          id="header" 
-          element="input" 
-          type="text" 
-          label="Post Header" 
-          validators={[VALIDATOR_REQUIRE()]} 
-          errorText="Please enter a post header."  
+          id="header"
+          element="input"
+          type="text"
+          label="Post Header"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a post header."
           onInput={inputHandler}
         />
         <Input
-          id="content" 
-          element="textarea" 
-          label="Content" 
-          validators={[VALIDATOR_REQUIRE()]} 
-          errorText="Please enter post content."  
+          id="content"
+          element="textarea"
+          label="Content"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter post content."
           onInput={inputHandler}
         />
-        <button 
-          type='submit' 
-          disabled={!formState.isValid} 
+        <button
+          type='submit'
+          disabled={!formState.isValid}
           className='post-form__submit'>
-            Create Post
+          Create Post
         </button>
       </form>
     </div>

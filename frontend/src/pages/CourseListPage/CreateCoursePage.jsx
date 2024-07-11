@@ -1,39 +1,12 @@
-import React, { useCallback, useReducer } from 'react';
+import React from 'react';
 import Input from '../../components/common/FormElements/Input';
+import { useForm } from '../../components/common/hooks/form-hook';
 import { VALIDATOR_REQUIRE } from '../../components/common/utils/validator';
-import './CreateCoursePage.css';
+import './CourseForm.css';
 
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_CHANGE':
-      let formIsValid = true;
-      for (const inputId in state.inputs) {
-        if (!state.inputs[inputId]) {
-          continue;
-        }
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputId]: { value: action.value, isValid: action.isValid }
-        },
-        isValid: formIsValid
-      };
-    default:
-      return state;
-    }
-
-}
 
 function CreateCoursePage() {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  const [formState, inputHandler] = useForm({
       code: {
         value: '',
         isValid: false
@@ -54,18 +27,10 @@ function CreateCoursePage() {
         value: '',
         isValid: false
       },
-    },
-    isValid: false
-  });
+    }, false
+  ); 
 
-  const inputHandler = useCallback((id, value, isValid) => {
-    dispatch({ 
-      type: 'INPUT_CHANGE', 
-      value: value, 
-      isValid: isValid, 
-      inputId: id 
-    });
-  }, []);
+  
 
   const courseSubmitHandler = (event) => {
     event.preventDefault();

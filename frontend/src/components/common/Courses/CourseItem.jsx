@@ -22,6 +22,11 @@ function CourseItem(props) {
           </Link>
           <p className='course-item__details'>{props.schedday + ' ' + props.schedtime}</p>
           <p className='course-item__details'>{props.instructor}</p>
+          <Link className="course-item__link" to={`/courses/${props.code.toLowerCase().replace(/\s/g, "")}`}>
+            <button className='course-item__button'>
+              Edit Course
+            </button>
+          </Link>
         </div>
       </div>
     </li>

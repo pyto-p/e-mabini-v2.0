@@ -1,25 +1,27 @@
 import React from 'react';
 import { BsPlus } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PostItem from './PostItem';
 import './PostList.css';
 
 function PostList(props) {
+  const { courseid } = useParams();
+  console.log("hey" + courseid);
 
-  if (props.posts.length === 0) { 
+  if (props.posts.length === 0) {
     return (
       <div className="post-list center">
         <h2>No posts.</h2>
       </div>
-    )
+    );
   }
-  
+
   return (
     <div className="post-list">
-       <Link className="classroom-page__link" to={`/create-post`}>
-          <BsPlus className='classroom-page__icon' />
-          Create Post
-        </Link>
+      <Link className="classroom-page__link" to={`/course/${courseid}/new`}>
+        <BsPlus className='classroom-page__icon' />
+        Create Post
+      </Link>
       {props.posts.map(post => (
         <PostItem
           key={post.id}
@@ -33,7 +35,7 @@ function PostList(props) {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default PostList
+export default PostList;

@@ -13,7 +13,7 @@ function CourseHeader(props) {
       </div>
       <div className="course-list__bar">
         <p>{props.user.code}</p>
-        <Link className="course-list__link" to="/create-course">
+        <Link className="course-list__link" to="/courses/new">
           <BsPlus className='course-list__icon' />
           Create Course
         </Link>

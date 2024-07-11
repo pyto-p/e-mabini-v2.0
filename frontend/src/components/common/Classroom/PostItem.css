@@ -32,3 +32,13 @@
   color: #444;
   font-weight: normal;
 }
+
+.post-item__button {
+  padding: 0.5rem;
+  font: inherit;
+  color: white;
+  background: #7e0202;
+  border: 1px solid #7e0202;
+  border-radius: 8px;
+  cursor: pointer;
+}
