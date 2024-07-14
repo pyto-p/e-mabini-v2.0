@@ -1,75 +1,48 @@
-const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 const HttpError = require("../models/http-error");
+const Course = require("../models/course-model");
+const User = require("../models/user-model");
 
-let DUMMY_COURSES = [
-	{
-		courseId: "c1",
-		userId: "u1",
-		image:
-			"https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=100&q=80",
-		code: "CSC 101",
-		name: "Introduction to Computer Science",
-		schedule: {
-			day: "T/TH/S",
-			time: "9:00 AM - 12:00 PM",
-		},
-		instructor: "Dr. John Doe",
-		section: "1-1",
-	},
-	{
-		courseId: "c3",
-		userId: "u1",
-		image:
-			"https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=100&q=80",
-		code: "WEB 102",
-		name: "Introduction to Artifical Intelligence",
-		schedule: {
-			day: "M/W/F",
-			time: "1:00 PM - 5:00 PM",
-		},
-		instructor: "Prof. Tony Starks",
-		section: "2-1",
-	},
-	{
-		courseId: "c2",
-		userId: "u2",
-		image:
-			"https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=100&q=80",
-		code: "WEB 102",
-		name: "Introduction to Web Development",
-		schedule: {
-			day: "M/W/F",
-			time: "11:00 AM - 3:00 PM",
-		},
-		instructor: "Prof. Jane Doe",
-		section: "1-1N",
-	},
-];
-
-const getCourseById = (req, res, next) => {
+const getCourseById = async (req, res, next) => {
   const cid = req.params.cid;
-  const course = DUMMY_COURSES.find((c) => c.courseId === cid);
+  let course;
+
+  try {
+    course = await Course.findById(cid).populate('userId').populate('posts'); // Populate user and posts
+  } catch (err) {
+    const error = new HttpError("Fetching course failed, please try again.", 500);
+    return next(error);
+  }
 
   if (!course) {
-    throw new HttpError("Course with id " + cid + " not found.", 404);
+    const error = new HttpError("Could not find a course for the provided id.", 404);
+    return next(error);
   }
 
-  res.json(course);
+  res.json({ course: course.toObject({ getters: true }) });
 };
 
-const getCoursesByUserId = (req, res, next) => {
+const getCoursesByUserId = async (req, res, next) => {
   const uid = req.params.uid;
-  const courses = DUMMY_COURSES.filter((c) => c.userId === uid);
+  let userWithCourses;
 
-  if (courses.length === 0) {
-    throw new HttpError("Courses of user with id " + uid + " not found.", 404);
+  try {
+    userWithCourses = await User.findById(uid).populate('courses');
+  } catch (err) {
+    const error = new HttpError("Fetching courses failed, please try again.", 500);
+    return next(error);
   }
 
-  res.json(courses);
+  if (!userWithCourses || userWithCourses.courses.length === 0) {
+    const error = new HttpError("Could not find courses for the provided user id.", 404);
+    return next(error);
+  }
+
+  res.json({ courses: userWithCourses.courses.map(course => course.toObject({ getters: true })) });
 };
 
-const createCourse = (req, res, next) => {
+const createCourse = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(new HttpError('Invalid inputs passed, please check your data.', 422));
@@ -77,53 +50,115 @@ const createCourse = (req, res, next) => {
 
   const { userId, image, code, name, schedule, instructor, section } = req.body;
 
-  const createdCourse = {
-    courseId: uuidv4(),
+  let user;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError("Creating course failed, please try again.", 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("Could not find user for provided id.", 404);
+    return next(error);
+  }
+
+  const createdCourse = new Course({
     userId,
     image,
     code,
     name,
     schedule,
-    instructor,
+    instructor: user.name,
     section,
-  };
+  });
 
-  DUMMY_COURSES.push(createdCourse);
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await createdCourse.save({ session: sess });
+    user.courses.push(createdCourse);
+    await user.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError("Creating course failed, please try again.", 500);
+    return next(error);
+  }
 
   res.status(201).json({ course: createdCourse });
 };
 
-const updateCourse = (req, res, next) => {
+const updateCourse = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(new HttpError('Invalid inputs passed, please check your data.', 422));
   }
 
   const { cid } = req.params;
-  const { image, code, name, schedule, section } = req.body;
+  const { image, code, name, schedule, instructor, section } = req.body;
+  let course;
 
-  const courseIndex = DUMMY_COURSES.findIndex((c) => c.courseId === cid);
-  if (courseIndex === -1) {
-    return next(new HttpError("Could not find a course for the provided id.", 404));
+  try {
+    course = await Course.findById(cid);
+  } catch (err) {
+    const error = new HttpError("Fetching course failed, please try again.", 500);
+    return next(error);
   }
 
-  const updatedCourse = {
-    ...DUMMY_COURSES[courseIndex],
-    image,
-    code,
-    name,
-    schedule,
-    section,
-  };
+  if (!course) {
+    const error = new HttpError("Could not find a course for the provided id.", 404);
+    return next(error);
+  }
 
-  DUMMY_COURSES[courseIndex] = updatedCourse;
+  course.image = image;
+  course.code = code;
+  course.name = name;
+  course.schedule = schedule;
+  course.instructor = instructor;
+  course.section = section;
 
-  res.status(200).json({ course: updatedCourse });
+  try {
+    await course.save();
+  } catch (err) {
+    const error = new HttpError("Updating course failed, please try again.", 500);
+    return next(error);
+  }
+
+  res.status(200).json({ course: course.toObject({ getters: true }) });
 };
 
-const deleteCourse = (req, res, next) => {
+const deleteCourse = async (req, res, next) => {
   const { cid } = req.params;
-  DUMMY_COURSES = DUMMY_COURSES.filter((c) => c.courseId !== cid);
+
+  let course;
+  try {
+    course = await Course.findById(cid).populate('userId').populate('posts');
+  } catch (err) {
+    const error = new HttpError("Fetching course failed, please try again.", 500);
+    return next(error);
+  }
+
+  if (!course) {
+    const error = new HttpError("Could not find a course for the provided id.", 404);
+    return next(error);
+  }
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await course.remove({ session: sess });
+    course.userId.courses.pull(course);
+    for (let post of course.posts) {
+      await post.remove({ session: sess });
+    }
+    await course.userId.save({ session: sess });
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError("Deleting course failed, please try again.", 500);
+    return next(error);
+  }
+
   res.status(200).json({ message: "Course deleted." });
 };
 

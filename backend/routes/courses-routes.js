@@ -1,17 +1,37 @@
-const express = require("express");
+const express = require('express');
+const { check } = require('express-validator');
+const coursesControllers = require('../controllers/courses-controllers');
+
 const router = express.Router();
 
-const HttpError = require("../models/http-error");
-const coursesControllers = require("../controllers/courses-controllers");
+router.get('/:cid', coursesControllers.getCourseById);
+router.get('/user/:uid', coursesControllers.getCoursesByUserId);
 
-router.get("/:cid", coursesControllers.getCourseById);
+router.post(
+  '/',
+  [
+    check('userId').not().isEmpty(),
+    check('image').not().isEmpty(),
+    check('code').not().isEmpty(),
+    check('name').not().isEmpty(),
+    check('schedule').not().isEmpty(),
+    check('section').not().isEmpty()
+  ],
+  coursesControllers.createCourse
+);
 
-router.get("/user/:uid", coursesControllers.getCoursesByUserId);
+router.patch(
+  '/:cid',
+  [
+    check('image').not().isEmpty(),
+    check('code').not().isEmpty(),
+    check('name').not().isEmpty(),
+    check('schedule').not().isEmpty(),
+    check('section').not().isEmpty()
+  ],
+  coursesControllers.updateCourse
+);
 
-router.post("/", coursesControllers.createCourse);
-
-router.patch("/:cid", coursesControllers.updateCourse);
-
-router.delete("/:cid", coursesControllers.deleteCourse); 
+router.delete('/:cid', coursesControllers.deleteCourse);
 
 module.exports = router;

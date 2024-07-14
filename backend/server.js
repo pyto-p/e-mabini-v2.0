@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const coursesRoutes = require('./routes/courses-routes');
 const postsRoutes = require('./routes/posts-routes');
@@ -27,4 +28,11 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-app.listen(5000);
+mongoose
+  .connect('mongodb+srv://admin:CEaAmgkZxwGrvMzz@cluster0.mq8qb0b.mongodb.net/lms?retryWrites=true&w=majority&appName=Cluster0')
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
